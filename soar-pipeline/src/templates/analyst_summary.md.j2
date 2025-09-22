@@ -1,0 +1,31 @@
+# Analyst Summary Template
+
+# This file is a Jinja2 template for generating the analyst summary in Markdown format.
+
+# Incident Summary
+## Incident ID: {{ incident.id }}
+### Severity: {{ incident.severity }}
+### Tags: {{ incident.tags | join(', ') }}
+
+---
+
+### Incident Details
+- **Description:** {{ incident.description }}
+- **Timestamp:** {{ incident.timestamp }}
+- **Source:** {{ incident.source }}
+
+### Indicators of Compromise (IOCs)
+| Type       | Value               | Enrichment          |
+|------------|---------------------|---------------------|
+{% for indicator in incident.iocs %}
+| {{ indicator.type }} | {{ indicator.value }} | {{ indicator.enrichment }} |
+{% endfor %}
+
+### Actions Taken
+- **Isolation Status:** {{ incident.isolation_status }}
+- **Notes:** {{ incident.notes }}
+
+---
+
+### Additional Information
+- **MITRE ATT&CK Techniques:** {{ incident.mitre_techniques | join(', ') }}
